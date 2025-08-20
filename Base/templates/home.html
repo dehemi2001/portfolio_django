@@ -1,0 +1,217 @@
+{% load static%}
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>portf </title>
+    <link rel="icon" type="image/x-icon" href="./Images/favicon.jpeg">
+    <link rel="stylesheet" href="{%static 'css/style.css'%}">
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+</head>
+
+<body>`
+
+    <!-- Navbar Section -->
+    <nav id="navbar" class="flex s-around bg-color">
+        <div class="left-nav">
+            <h2 class="t-white">Portfolio</h2>
+        </div>
+        <div class="right-nav">
+            <ul class="flex">
+                <li><a href="#home" class="t-white roboto">Home <i class="fa-solid fa-house"></i></a></li>
+                <li><a href="#about" class="t-white roboto">About Me <i class="fa-solid fa-user"></i></a></li>
+                <li><a href="#skills" class="t-white roboto">Skills <i class="fa-solid fa-code"></i></a></li>
+                <li><a href="#Projects" class="t-white roboto">Projects <i class="fas fa-project-diagram"></i></a></li>
+                <li><a href="#Contact" class="t-white roboto">Contact <i class="fa-solid fa-rocket"></i></a></li>
+            </ul>
+        </div>
+    </nav>
+
+
+
+    <!-- Home Section -->
+    <section id="home" class="flex s-around sw-80 m-auto">
+        <div class="home-left flex items-center">
+            <div class="home-content">
+                <h6 class="poppinss">Hi, I'm</h6>
+                <h1 class="t-white">Dehemi Patabendige</h1>
+                <h4 class="poppinss">Software Engineer</h4>
+                <a href="{% static 'pdf/Resume.pdf' %}" target="_blank">
+                    <button class="btn poppins">Resume</button></a>
+
+                <a class="btn live poppins" id="hireme" href="#Contact" target="_blank">Let's Talk</a>
+            </div>
+        </div>
+        <div class="home-right flex s-center items-center">
+            <div class="circle flex s-center items-center" id="mainImage">
+
+                <img src="{% static 'images/avatar.png'%}" alt="">
+            </div>
+
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h1 class="t-center my-2 t-white f-2">About Me</h1>
+        <div class="about-container flex s-around ">
+            <div class=" about-left flex s-center items-center">
+                <!-- Here in src replade the given link with your secondary image link -->
+                <img src="{%static 'images/coding.png'%}" alt="" style="width: 60%;">
+            </div>
+
+            <div class="about-right flex">
+                <div class="about-content">
+                    <h1 class="t-white m-b-1 poppins">Dehemi Patabendige</h1>
+                    <p class="t-white poppins">As a passionate full-stack software engineer with a primary focus on the
+                        back end, I specialize in building robust and scalable applications using Python/Django. I am
+                        currently a B.Tech student in Software and Intelligent Systems at the University of Vocational
+                        Technology. My passion lies in crafting quality products that not only meet but exceed customer
+                        needs. I am committed to continuous learning and always eager to explore new technologies to
+                        deliver innovative and effective solutions.</p>
+                    <a class="btn " id="hireme" href="#Contact">Hire Me</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h1 class="t-center my-2 t-white f-2">Skills</h1>
+        <div class="services-container flex s-around h-50">
+            <div class=" skills-left flex s-center items-center">
+                <img src="{%static 'images/pro.png'%}" alt="">
+            </div>
+
+            <div class="skills-right flex items-center">
+                <div class="skillss-container">
+                    <div class="python bar p-relative"><span class="bar-content left t-white">Python</span><span
+                            class="bar-content right-skills t-white">90%</span></div>
+                    <div class="django bar p-relative"><span class="bar-content left t-white">Django</span><span
+                            class="bar-content right-skills t-white">90%</span></div>
+                    <div class="postgresql bar p-relative"><span class="bar-content left t-white">PostgreSQL</span><span
+                            class="bar-content right-skills t-white">90%</span></div>
+                    <div class="mongodb bar p-relative"><span class="bar-content left t-white">MongoDB</span><span
+                            class="bar-content right-skills t-white">70%</span></div>
+                    <div class="html bar p-relative"><span class="bar-content left t-white">HTML</span><span
+                            class="bar-content right-skills t-white">80%</span></div>
+                    <div class="css bar p-relative"><span class="bar-content left t-white">CSS</span><span
+                            class="bar-content right-skills t-white">30%</span></div>
+                    <div class="javascript bar p-relative"><span class="bar-content left t-white">Javascript</span><span
+                            class="bar-content right-skills t-white">50%</span></div>
+                    <div class="react bar p-relative"><span class="bar-content left t-white">React</span><span
+                            class="bar-content right-skills t-white">50%</span></div>
+                    <div class="reactnative bar p-relative"><span class="bar-content left t-white">React
+                            Native</span><span class="bar-content right-skills t-white">50%</span></div>
+                    <div class="github bar p-relative"><span class="bar-content left t-white">GitHub</span><span
+                            class="bar-content right-skills t-white">90%</span></div>
+                    <div class="jenkins bar p-relative"><span class="bar-content left t-white">Jenkins</span><span
+                            class="bar-content right-skills t-white">40%</span></div>
+                    <div class="docker bar p-relative"><span class="bar-content left t-white">Docker</span><span
+                            class="bar-content right-skills t-white">40%</span></div>
+                    <div class="kubernetes bar p-relative"><span class="bar-content left t-white">Kubernetes</span><span
+                            class="bar-content right-skills t-white">30%</span></div>
+                    <div class="oracle bar p-relative"><span class="bar-content left t-white">Oracle Cloud</span><span
+                            class="bar-content right-skills t-white">30%</span></div>
+                    <div class="iot bar p-relative"><span class="bar-content left t-white">IOT</span><span
+                            class="bar-content right-skills t-white">50%</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Projects Section -->
+    <section id="Projects">
+        <h1 class=" t-center my-2 t-white f-2">Projects</h1>
+        <div class="projects-container flex s-center">
+
+            <div class="projects-item flex f-col s-center items-center">
+                <h1 class="t-white poppins">E-commerce System</h1>
+                <p class="t-white poppins">This is an e-commerce platform for Solid Computers, built with PHP, MySQL,
+                    HTML, CSS, and JavaScript. It allows customers to browse, add to cart, and order products, while
+                    admins manage inventory and orders. Features include responsive design, SSL security, and email
+                    notifications, with a placeholder for future payment integration.</p>
+                <div class="buttons flex s-around">
+                    <a href="https://github.com/dehemi2001/PHP-EcommerceProject.git" target="_blanks"
+                        class="btn mx-1 m-top">GitHub</a>
+                    <a href="https://solidcomputers.wuaze.com/" target="_blanks" class="btn m-top live">Live
+                        Link</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Contact Me Section -->
+    <section id="Contact" class="m-b-1">
+        <h1 class=" t-center my-2 t-white f-2">Contact Me</h1>
+        <div class="contact-container flex f-col items-center">
+            <div class="contact-info t-white poppins"
+                style="margin-bottom: 2rem; text-align: center; line-height: 1.8;">
+                <p><i class="fa-solid fa-envelope"></i>&nbsp; <a href="mailto:dp.dehemisuvipul@gmail.com"
+                        class="t-white" style="text-decoration: none;">dp.dehemisuvipul@gmail.com</a></p>
+                <p><i class="fa-solid fa-phone"></i>&nbsp; <a href="tel:+94774075447" class="t-white"
+                        style="text-decoration: none;">+94774075447</a></p>
+            </div>
+            <div class="form" id="contactForm">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="name form-div">
+                        <input type="text" name="name" id="name" class="poppins" placeholder="Enter Your Name">
+                    </div>
+
+                    <div class="email form-div">
+                        <input type="email" name="email" id="" class="poppins" placeholder="Enter Your Email" required>
+                    </div>
+
+                    <div class="phone form-div">
+                        <input type="phone" name="number" id="" class="poppins" placeholder="Enter Your Phone" required>
+                    </div>
+
+                    <div class="textarea form-div">
+                        <textarea name="content" id="textarea" cols="30" rows="10" class="poppins"
+                            placeholder="Enter Messages"></textarea>
+                    </div>
+                    <button type="submit" class="btn poppins" id="submit">Send</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer id="footer">
+        <ul class="flex s-center w-80 m-auto my-2 res">
+            <li><a href="#home" class="poppinss">Home</a></li>
+            <li><a href="#about" class="poppinss">About</a></li>
+            <li><a href="#skills" class="poppinss">Skills</a></li>
+            <li><a href="#Projects" class="poppinss">Projects</a></li>
+            <li><a href="#Contact" class="poppinss">Contact</a></li>
+        </ul>
+        <ul class="flex s-center w-80 font-awesome ">
+            <a href="https://linkedin.com/in/dehemi" target="_blank">
+                <li><i class="fa-brands fa-linkedin-in"></i></li>
+            </a>
+            <a href="https://github.com/dehemi2001" target="_blank">
+                <li><i class="fa-brands fa-github"></i></li>
+            </a>
+            <a href="https://www.instagram.com/dehemipatabendige/" target="_blank">
+                <li><i class="fa-brands fa-instagram"></i></li>
+            </a>
+
+        </ul>
+        <p class="t-center my-2 poppins">&copy; All Rights Reserved - <span class="cpy-white poppins">Dehemi Patabendige
+            </span></p>
+
+    </footer>
+
+</body>
+
+</html>
