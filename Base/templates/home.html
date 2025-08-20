@@ -1,21 +1,20 @@
 {% load static%}
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>portf </title>
-    <link rel="icon" type="image/x-icon" href="./Images/favicon.jpeg">
+    <title>Dehemi Patabendige - Portfolio</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.jpeg' %}">
     <link rel="stylesheet" href="{%static 'css/style.css'%}">
 
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 </head>
 
-<body>`
+<body>
 
     <!-- Navbar Section -->
     <nav id="navbar" class="flex s-around bg-color">
@@ -23,6 +22,10 @@
             <h2 class="t-white">Portfolio</h2>
         </div>
         <div class="right-nav">
+            <input type="checkbox" id="check">
+            <label for="check" class="checkBtn">
+                <i class="fa-solid fa-bars"></i>
+            </label>
             <ul class="flex">
                 <li><a href="#home" class="t-white roboto">Home <i class="fa-solid fa-house"></i></a></li>
                 <li><a href="#about" class="t-white roboto">About Me <i class="fa-solid fa-user"></i></a></li>
@@ -140,9 +143,9 @@
                     admins manage inventory and orders. Features include responsive design, SSL security, and email
                     notifications, with a placeholder for future payment integration.</p>
                 <div class="buttons flex s-around">
-                    <a href="https://github.com/dehemi2001/PHP-EcommerceProject.git" target="_blanks"
+                    <a href="https://github.com/dehemi2001/PHP-EcommerceProject.git" target="_blank"
                         class="btn mx-1 m-top">GitHub</a>
-                    <a href="https://solidcomputers.wuaze.com/" target="_blanks" class="btn m-top live">Live
+                    <a href="https://solidcomputers.wuaze.com/" target="_blank" class="btn m-top live">Live
                         Link</a>
                 </div>
             </div>
