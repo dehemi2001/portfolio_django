@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dehemi Patabendige - Portfolio</title>
+    <title>{{ user.name }} - Portfolio</title>
     <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.jpeg' %}">
     <link rel="stylesheet" href="{%static 'css/style.css'%}">
 
@@ -43,9 +43,9 @@
         <div class="home-left flex items-center">
             <div class="home-content">
                 <h6 class="poppinss">Hi, I'm</h6>
-                <h1 class="t-white">Dehemi Patabendige</h1>
-                <h4 class="poppinss">Software Engineer</h4>
-                <a href="{% static 'pdf/Resume.pdf' %}" target="_blank">
+                <h1 class="t-white">{{ user.name }}</h1>
+                <h4 class="poppinss">{{ user.designation }}</h4>
+                <a href="{{ user.resume.url }}" target="_blank">
                     <button class="btn poppins">Resume</button></a>
 
                 <a class="btn live poppins" id="hireme" href="#Contact" target="_blank">Let's Talk</a>
@@ -54,7 +54,7 @@
         <div class="home-right flex s-center items-center">
             <div class="circle flex s-center items-center" id="mainImage">
 
-                <img src="{% static 'images/avatar.png'%}" alt="">
+                <img src="{{ user.avatar.url }}" alt="User Avatar">
             </div>
 
         </div>
@@ -71,13 +71,8 @@
 
             <div class="about-right flex">
                 <div class="about-content">
-                    <h1 class="t-white m-b-1 poppins">Dehemi Patabendige</h1>
-                    <p class="t-white poppins">As a passionate full-stack software engineer with a primary focus on the
-                        back end, I specialize in building robust and scalable applications using Python/Django. I am
-                        currently a B.Tech student in Software and Intelligent Systems at the University of Vocational
-                        Technology. My passion lies in crafting quality products that not only meet but exceed customer
-                        needs. I am committed to continuous learning and always eager to explore new technologies to
-                        deliver innovative and effective solutions.</p>
+                    <h1 class="t-white m-b-1 poppins">{{ user.name }}</h1>
+                    <p class="t-white poppins">{{ user.description }}</p>
                     <a class="btn " id="hireme" href="#Contact">Hire Me</a>
                 </div>
             </div>
@@ -94,36 +89,13 @@
 
             <div class="skills-right flex items-center">
                 <div class="skillss-container">
-                    <div class="python bar p-relative"><span class="bar-content left t-white">Python</span><span
-                            class="bar-content right-skills t-white">90%</span></div>
-                    <div class="django bar p-relative"><span class="bar-content left t-white">Django</span><span
-                            class="bar-content right-skills t-white">90%</span></div>
-                    <div class="postgresql bar p-relative"><span class="bar-content left t-white">PostgreSQL</span><span
-                            class="bar-content right-skills t-white">90%</span></div>
-                    <div class="mongodb bar p-relative"><span class="bar-content left t-white">MongoDB</span><span
-                            class="bar-content right-skills t-white">70%</span></div>
-                    <div class="html bar p-relative"><span class="bar-content left t-white">HTML</span><span
-                            class="bar-content right-skills t-white">80%</span></div>
-                    <div class="css bar p-relative"><span class="bar-content left t-white">CSS</span><span
-                            class="bar-content right-skills t-white">30%</span></div>
-                    <div class="javascript bar p-relative"><span class="bar-content left t-white">Javascript</span><span
-                            class="bar-content right-skills t-white">50%</span></div>
-                    <div class="react bar p-relative"><span class="bar-content left t-white">React</span><span
-                            class="bar-content right-skills t-white">50%</span></div>
-                    <div class="reactnative bar p-relative"><span class="bar-content left t-white">React
-                            Native</span><span class="bar-content right-skills t-white">50%</span></div>
-                    <div class="github bar p-relative"><span class="bar-content left t-white">GitHub</span><span
-                            class="bar-content right-skills t-white">90%</span></div>
-                    <div class="jenkins bar p-relative"><span class="bar-content left t-white">Jenkins</span><span
-                            class="bar-content right-skills t-white">40%</span></div>
-                    <div class="docker bar p-relative"><span class="bar-content left t-white">Docker</span><span
-                            class="bar-content right-skills t-white">40%</span></div>
-                    <div class="kubernetes bar p-relative"><span class="bar-content left t-white">Kubernetes</span><span
-                            class="bar-content right-skills t-white">30%</span></div>
-                    <div class="oracle bar p-relative"><span class="bar-content left t-white">Oracle Cloud</span><span
-                            class="bar-content right-skills t-white">30%</span></div>
-                    <div class="iot bar p-relative"><span class="bar-content left t-white">IOT</span><span
-                            class="bar-content right-skills t-white">50%</span></div>
+                    {% for skill in skills %}
+                    <div class="python bar p-relative"
+                        style="width: {{ skill.percentage }}%; background-color: {{ skill.color }};">
+                        <span class="bar-content left t-white">{{skill.name}}</span><span
+                            class="bar-content right-skills t-white">{{ skill.percentage }}%</span>
+                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
@@ -136,19 +108,20 @@
         <h1 class=" t-center my-2 t-white f-2">Projects</h1>
         <div class="projects-container flex s-center">
 
+            {% for project in projects %}
             <div class="projects-item flex f-col s-center items-center">
-                <h1 class="t-white poppins">E-commerce System</h1>
-                <p class="t-white poppins">This is an e-commerce platform for Solid Computers, built with PHP, MySQL,
-                    HTML, CSS, and JavaScript. It allows customers to browse, add to cart, and order products, while
-                    admins manage inventory and orders. Features include responsive design, SSL security, and email
-                    notifications, with a placeholder for future payment integration.</p>
+                <h1 class="t-white poppins">{{ project.name }}</h1>
+                <p class="t-white poppins">{{ project.description }}</p>
                 <div class="buttons flex s-around">
-                    <a href="https://github.com/dehemi2001/PHP-EcommerceProject.git" target="_blank"
-                        class="btn mx-1 m-top">GitHub</a>
-                    <a href="https://solidcomputers.wuaze.com/" target="_blank" class="btn m-top live">Live
-                        Link</a>
+                    {% if project.github_link %}
+                    <a href="{{ project.github_link }}" target="_blank" class="btn mx-1 m-top">GitHub</a>
+                    {% endif %}
+                    {% if project.live_link %}
+                    <a href="{{ project.live_link }}" target="_blank" class="btn m-top live">Live Link</a>
+                    {% endif %}
                 </div>
             </div>
+            {% endfor %}
 
         </div>
     </section>
@@ -157,12 +130,20 @@
     <section id="Contact" class="m-b-1">
         <h1 class=" t-center my-2 t-white f-2">Contact Me</h1>
         <div class="contact-container flex f-col items-center">
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert-{{ message.tags }} t-white"
+                style="margin-bottom: 1rem; padding: 1rem; border-radius: 5px; background-color: {% if message.tags == 'success' %}#2c6c2c{% else %}#c62828{% endif %};">
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
             <div class="contact-info t-white poppins"
                 style="margin-bottom: 2rem; text-align: center; line-height: 1.8;">
-                <p><i class="fa-solid fa-envelope"></i>&nbsp; <a href="mailto:dp.dehemisuvipul@gmail.com"
-                        class="t-white" style="text-decoration: none;">dp.dehemisuvipul@gmail.com</a></p>
-                <p><i class="fa-solid fa-phone"></i>&nbsp; <a href="tel:+94774075447" class="t-white"
-                        style="text-decoration: none;">+94774075447</a></p>
+                <p><i class="fa-solid fa-envelope"></i>&nbsp; <a href="mailto:{{ user.email }}" class="t-white"
+                        style="text-decoration: none;">{{ user.email }}</a></p>
+                <p><i class="fa-solid fa-phone"></i>&nbsp; <a href="tel:{{ user.number }}" class="t-white"
+                        style="text-decoration: none;">{{ user.number }}</a></p>
             </div>
             <div class="form" id="contactForm">
                 <form method="post">
@@ -199,19 +180,19 @@
             <li><a href="#Contact" class="poppinss">Contact</a></li>
         </ul>
         <ul class="flex s-center w-80 font-awesome ">
-            <a href="https://linkedin.com/in/dehemi" target="_blank">
+            <a href="{{ user.linkedin }}" target="_blank">
                 <li><i class="fa-brands fa-linkedin-in"></i></li>
             </a>
-            <a href="https://github.com/dehemi2001" target="_blank">
+            <a href="{{ user.github }}" target="_blank">
                 <li><i class="fa-brands fa-github"></i></li>
             </a>
-            <a href="https://www.instagram.com/dehemipatabendige/" target="_blank">
+            <a href="{{ user.instagram }}" target="_blank">
                 <li><i class="fa-brands fa-instagram"></i></li>
             </a>
 
         </ul>
-        <p class="t-center my-2 poppins">&copy; All Rights Reserved - <span class="cpy-white poppins">Dehemi Patabendige
-            </span></p>
+        <p class="t-center my-2 poppins">&copy; All Rights Reserved - <span class="cpy-white poppins">
+                {{ user.name }}</span></p>
 
     </footer>
 
