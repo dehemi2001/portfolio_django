@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from .models import (
     UserProfile,
     Experience,
@@ -13,6 +13,7 @@ from .models import (
 )
 
 # Register your models here.
+admin.site.unregister(Group)
 
 # --- Inlines ---
 
@@ -32,10 +33,31 @@ class ProjectTechnologyInline(admin.StackedInline):
 
 # --- ModelAdmins ---
 
+class SingleUserProfileMixin:
+    exclude = ('user_profile',)
+
+    def save_model(self, request, obj, form, change):
+        if not getattr(obj, 'user_profile_id', None):
+            obj.user_profile = UserProfile.objects.first()
+        super().save_model(request, obj, form, change)
+
 # Custom User admin to include the UserProfile
 class CustomUserAdmin(BaseUserAdmin):
     inlines = (UserProfileInline,)
-    list_display = ('username', 'email', 'first_name', 'last_name', 'is_staff')
+    list_display = ('username', 'email', 'first_name', 'last_name')
+    list_filter = ()
+
+    fieldsets = (
+        (None, {'fields': ('username', 'password')}),
+        ('Personal info', {'fields': ('first_name', 'last_name', 'email')}),
+        ('Important dates', {'fields': ('last_login', 'date_joined')}),
+    )
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
 
     def get_inline_instances(self, request, obj=None):
         if not obj:
@@ -43,29 +65,26 @@ class CustomUserAdmin(BaseUserAdmin):
         return super(CustomUserAdmin, self).get_inline_instances(request, obj)
 
 @admin.register(Experience)
-class ExperienceAdmin(admin.ModelAdmin):
-    list_display = ('name', 'company', 'user_profile', 'order')
+class ExperienceAdmin(SingleUserProfileMixin, admin.ModelAdmin):
+    list_display = ('name', 'company', 'order')
     list_editable = ('order',)
-    list_filter = ('user_profile',)
-    search_fields = ('name', 'company', 'user_profile__user__username')
+    search_fields = ('name', 'company')
 
 @admin.register(Skill)
-class SkillAdmin(admin.ModelAdmin):
-    list_display = ('name', 'percentage', 'user_profile', 'order')
+class SkillAdmin(SingleUserProfileMixin, admin.ModelAdmin):
+    list_display = ('name', 'percentage', 'order')
     list_editable = ('order',)
-    list_filter = ('user_profile',)
-    search_fields = ('name', 'user_profile__user__username')
+    search_fields = ('name',)
 
 @admin.register(Tool)
-class ToolAdmin(admin.ModelAdmin):
-    list_display = ('name', 'user_profile', 'order')
+class ToolAdmin(SingleUserProfileMixin, admin.ModelAdmin):
+    list_display = ('name', 'order')
     list_editable = ('order',)
-    list_filter = ('user_profile',)
-    search_fields = ('name', 'user_profile__user__username')
+    search_fields = ('name',)
 
 @admin.register(Project)
-class ProjectAdmin(admin.ModelAdmin):
-    list_display = ('name', 'user_profile', 'order')
+class ProjectAdmin(SingleUserProfileMixin, admin.ModelAdmin):
+    list_display = ('name', 'order')
     list_editable = ('order',)
     inlines = [ProjectTechnologyInline]
 
@@ -73,10 +92,21 @@ class ProjectAdmin(admin.ModelAdmin):
 class TechnologyAdmin(admin.ModelAdmin):
     search_fields = ('name',)
 
+    def has_module_permission(self, request):
+        """Hides the Technology model from the main admin index but allows it to be accessed for autocomplete and green plus."""
+        return False
+
 @admin.register(Contact)
 class ContactAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'subject', 'created_at')
-    readonly_fields = ('user_profile', 'name', 'email', 'subject', 'message', 'created_at')
+    readonly_fields = ('name', 'email', 'subject', 'message', 'created_at')
+    exclude = ('user_profile',)
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False
 
 # Re-register User model with our custom admin
 admin.site.unregister(User)

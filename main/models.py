@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator, FileExtensionValidator
-from django.db.models.signals import pre_save, post_delete
+from django.db.models.signals import pre_save, post_save, post_delete
 from django.dispatch import receiver
 
 # Create your models here.
@@ -160,3 +160,12 @@ def delete_file_on_delete(sender, instance, **kwargs):
             file_to_delete = getattr(instance, field.name)
             if file_to_delete:
                 file_to_delete.delete(save=False)
+
+@receiver(post_save, sender=ProjectTechnology)
+@receiver(post_delete, sender=ProjectTechnology)
+def cleanup_orphan_technologies(sender, **kwargs):
+    """
+    Cleans up any technologies that are not associated with any project.
+    This runs whenever a ProjectTechnology link is saved or deleted.
+    """
+    Technology.objects.filter(projecttechnology__isnull=True).delete()
