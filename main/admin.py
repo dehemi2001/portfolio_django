@@ -33,6 +33,8 @@ class ProjectTechnologyInline(admin.StackedInline):
 
 # --- ModelAdmins ---
 
+from django.db.models import Max
+
 class SingleUserProfileMixin:
     exclude = ('user_profile',)
 
@@ -40,6 +42,13 @@ class SingleUserProfileMixin:
         if not getattr(obj, 'user_profile_id', None):
             obj.user_profile = UserProfile.objects.first()
         super().save_model(request, obj, form, change)
+
+    def get_changeform_initial_data(self, request):
+        initial = super().get_changeform_initial_data(request)
+        if 'order' not in initial:
+            max_order = self.model.objects.aggregate(max_val=Max('order'))['max_val']
+            initial['order'] = (max_order or 0) + 1
+        return initial
 
 # Custom User admin to include the UserProfile
 class CustomUserAdmin(BaseUserAdmin):
