@@ -1,4 +1,4 @@
-from django.db import models
+from django.db import models, transaction
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator, FileExtensionValidator
 from django.db.models.signals import pre_save, post_save, post_delete
@@ -73,6 +73,7 @@ class Technology(models.Model):
     
     class Meta:
         verbose_name_plural = "Technologies"
+        ordering = ['name']
 
 class Project(models.Model):
     user_profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='projects')
@@ -166,6 +167,8 @@ def delete_file_on_delete(sender, instance, **kwargs):
 def cleanup_orphan_technologies(sender, **kwargs):
     """
     Cleans up any technologies that are not associated with any project.
-    This runs whenever a ProjectTechnology link is saved or deleted.
+    Uses transaction.on_commit to ensure it only runs after the save/delete
+    is fully complete, avoiding issues during multi-row admin saves.
     """
-    Technology.objects.filter(projecttechnology__isnull=True).delete()
+    transaction.on_commit(lambda: Technology.objects.filter(projecttechnology__isnull=True).delete())
+
